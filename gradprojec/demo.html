@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detection Chat</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #211f1f;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #chatbox {
+      flex: 1;
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    #userInput {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    #userMessage {
+      flex: 1;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    #sendMessage {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #sendMessage:hover {
+      background-color: #0056b3;
+    }
+
+    #clearChat {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #clearChat:hover {
+      background-color: #c82333;
+    }
+
+    .bot-message {
+      background-color: #c6dde6;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #333;
+      color: #fff;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Fake News Detection Chat</h1>
+  </header>
+
+  <main>
+    <div id="chatbox"></div>
+    <div id="userInput">
+      <input type="text" id="userMessage" placeholder="Type your message...">
+      <button id="sendMessage" onclick="sendMessage()">Send</button>
+      <button id="clearChat" onclick="clearChat()">Clear Chat</button>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2023 Fake News Detection
+  </footer>
+
+  <script>
+    function sendMessage() {
+      const userMessage = document.getElementById('userMessage').value;
+      if (userMessage.trim() === '') return;
+
+      appendMessage('user', userMessage);
+
+      // Call your backend with userMessage and get the response
+      const botResponse = 'This is a placeholder response from the bot.';
+
+      appendMessage('bot', botResponse);
+
+      // Clear the user input
+      document.getElementById('userMessage').value = '';
+    }
+
+    function appendMessage(sender, message) {
+      const chatbox = document.getElementById('chatbox');
+      const messageElement = document.createElement('div');
+      messageElement.classList.add(`${sender}-message`);
+      messageElement.innerHTML = message;
+      chatbox.appendChild(messageElement);
+
+      // Scroll to the bottom of the chatbox
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function clearChat() {
+      const chatbox = document.getElementById('chatbox');
+      chatbox.innerHTML = ''; // Clear the chatbox content
+    }
+  </script>
+
+</body>
+</html>
